@@ -2,7 +2,7 @@
 using Nfe.Model;
 using Nfe.Negocio.Geral;
 using Nfe.Negocio.InterfacesAbstratos;
-using NFe.retEnviNFe;
+using Nfe.retEnviNFe;
 using System;
 using System.Collections.Generic;
 using System.Data;

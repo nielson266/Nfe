@@ -10,8 +10,8 @@ namespace Nfe.Model
     {
         public void InsertErroLog(string DescErro)
         {
-            BancoDados.InsertAlterarExcluir(" INSERT INTO LogNfe (DtOcor, TxOcor, FlErro) \n" +
-                                            " VALUES     (GETDATE(),'"+ DescErro +"',1)");
+            BancoDados.InsertAlterarExcluir(" INSERT INTO LogNfe (DtOcor, TxOcor) \n" +
+                                            " VALUES     (now()::timestamp,'" + DescErro +"')");
         }
     }
 }

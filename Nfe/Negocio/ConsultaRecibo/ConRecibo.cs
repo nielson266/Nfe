@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
-using Nfe.ConsReciNFe;
+using Nfe.consReciNFe;
 using NFe.retConsReciNFe;
 using Nfe.Negocio.Geral;
 using Nfe.Model;

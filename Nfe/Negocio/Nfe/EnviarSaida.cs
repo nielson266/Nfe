@@ -11,7 +11,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Xml.Serialization;
 using System.Data;
 using Nfe.Negocio.Geral;
-using NFe.retEnviNFe;
+using Nfe.retEnviNFe;
 using System.IO;
 
 namespace Nfe.Negocio.Nfe
@@ -39,6 +39,8 @@ namespace Nfe.Negocio.Nfe
 
         string[] CfopDev = new string[] { "1201", "1202", "1203", "1204", "1208", "1209", "1410", "1411", "1503", "1504", "1505", "1506", "1553", "1660", "1661", "1662", "1918", "1919", "2201", "2202", "2203", "2204", "2208", "2209", "2410", "2411", "2503", "2504", "2505", "2506", "2553", "2660", "2661", "2662", "2918", "2919", "3201", "3202", "3211", "3503", "3553", "5201", "5202", "5208", "5209", "5210", "5410", "5411", "5412", "5413", "5503", "5553", "5555", "5556", "5660", "5661", "5662", "5918", "5919", "6201", "6202", "6208", "6209", "6210", "6410", "6411", "6412", "6413", "6503", "6553", "6555", "6556", "6660", "6661", "6662", "6918", "6919", "7201", "7202", "7210", "7211", "7553", "7556" };
 
+        Dictionary<string, decimal> ListAliqUfInterestadual = new Dictionary<string, decimal>();
+
         public void Enviar(Entidade_NotaFiscal ObjEnt, out Entidade_NotaFiscal objDados)
         {
             //var d = CfopDev.Contains("5556");
@@ -55,6 +57,8 @@ namespace Nfe.Negocio.Nfe
             NFuncoes = new NegocioFuncoesGerais();
 
             ObjNotaFiscal = new Entidade_NotaFiscal();
+
+            CarregaAliqInterestadual();
 
             var Lojas = FuncoesGerais.LojasEmitentes();
 
@@ -99,7 +103,7 @@ namespace Nfe.Negocio.Nfe
                                 Settings.NewLineHandling = NewLineHandling.None;
                                 Settings.Indent = true;
                                 Settings.IndentChars = "";
-                                                                ns.Add(string.Empty, "http://www.portalfiscal.inf.br/nfe");
+                                ns.Add(string.Empty, "http://www.portalfiscal.inf.br/nfe");
 
                                 Sw = new UTF8StringWriter();
                                 Wx = XmlWriter.Create(Sw, Settings);
@@ -523,6 +527,36 @@ namespace Nfe.Negocio.Nfe
         string CabecalhoEnvieNfe(int nrlote)
         {
             return "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <enviNFe xmlns=\"http://www.portalfiscal.inf.br/nfe\" versao=\"3.10\"> <idLote>" + nrlote + "</idLote><indSinc>0</indSinc></enviNFe>";
+        }
+        void CarregaAliqInterestadual()
+        {
+            ListAliqUfInterestadual.Add("AC",Convert.ToDecimal(17.00));
+            ListAliqUfInterestadual.Add("AL", Convert.ToDecimal(17.00));
+            ListAliqUfInterestadual.Add("AM", Convert.ToDecimal(18.00));
+            ListAliqUfInterestadual.Add("AP", Convert.ToDecimal(18.00));
+            ListAliqUfInterestadual.Add("BA", Convert.ToDecimal(18.00));
+            ListAliqUfInterestadual.Add("CE", Convert.ToDecimal(17.00));
+            ListAliqUfInterestadual.Add("DF", Convert.ToDecimal(18.00));
+            ListAliqUfInterestadual.Add("ES", Convert.ToDecimal(17.00));
+            ListAliqUfInterestadual.Add("GO", Convert.ToDecimal(17.00));
+            ListAliqUfInterestadual.Add("MA", Convert.ToDecimal(18.00));
+            ListAliqUfInterestadual.Add("MG", Convert.ToDecimal(18.00));
+            ListAliqUfInterestadual.Add("MS", Convert.ToDecimal(17.00));
+            ListAliqUfInterestadual.Add("MT", Convert.ToDecimal(17.00));
+            ListAliqUfInterestadual.Add("PA", Convert.ToDecimal(17.00));
+            ListAliqUfInterestadual.Add("PB", Convert.ToDecimal(18.00));
+            ListAliqUfInterestadual.Add("PE", Convert.ToDecimal(18.00));
+            ListAliqUfInterestadual.Add("PI", Convert.ToDecimal(17.00));
+            ListAliqUfInterestadual.Add("PR", Convert.ToDecimal(17.00));
+            ListAliqUfInterestadual.Add("RJ", Convert.ToDecimal(18.00));
+            ListAliqUfInterestadual.Add("RN", Convert.ToDecimal(18.00));
+            ListAliqUfInterestadual.Add("RO", Convert.ToDecimal(17.50));
+            ListAliqUfInterestadual.Add("RR", Convert.ToDecimal(17.00));
+            ListAliqUfInterestadual.Add("RS", Convert.ToDecimal(18.00));
+            ListAliqUfInterestadual.Add("SC", Convert.ToDecimal(17.00));
+            ListAliqUfInterestadual.Add("SE", Convert.ToDecimal(18.00));
+            ListAliqUfInterestadual.Add("SP", Convert.ToDecimal(18.00));
+            ListAliqUfInterestadual.Add("TO", Convert.ToDecimal(18.00));
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Nfe.Model
         public void UpdateLoteRecebidos(string StatusLote, DateTime RecSefaz, string NrTempoProcSefaz, string NumeroRecibo, string Retorno, string NrLote, int Loja)
         {
             BancoDados.InsertAlterarExcluir(" UPDATE LoteNFe \n" +
-                                            " SET NrRecibo = '" + NumeroRecibo.Trim() + "', StLote = '" + StatusLote.Trim() + "', CdRetorno= " + Retorno + ",  DtRecSefaz = '" + string.Format("{0:MM/dd/yyyy hh:mm:ss}", RecSefaz.Date) + "', NrTempoProcSefaz = '" + NrTempoProcSefaz.Trim() + "' \n" +
+                                            " SET NrRecibo = '" + NumeroRecibo.Trim() + "', StLote = '" + StatusLote.Trim() + "', CdRetorno= " + Retorno + ",  DtRecSefaz = '" + string.Format("{0:dd/MM/yyyy hh:mm:ss}", RecSefaz.Date) + "', NrTempoProcSefaz = '" + NrTempoProcSefaz.Trim() + "' \n" +
                                             " WHERE (NrLote = " + NrLote + ") AND (id_loja = "+ Loja +")");
         }
 
@@ -37,7 +37,7 @@ namespace Nfe.Model
         public bool LoteProcessado(string Retorno, DateTime DtProcessamento, string Recibo)
         {
             BancoDados.InsertAlterarExcluir(" UPDATE LoteNFe "+
-                                            " SET StLote = 'P', CdRetorno =" + Retorno +", DtResultProcSefaz = '"+ string.Format("{0:MM/dd/yyyy HH:mm:ss}", DtProcessamento) +"' "+
+                                            " SET StLote = 'P', CdRetorno =" + Retorno +", DtResultProcSefaz = '"+ string.Format("{0:dd/MM/yyyy HH:mm:ss}", DtProcessamento) +"' "+
                                             " WHERE (NrRecibo = " + Recibo + ")");
 
             return true;

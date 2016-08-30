@@ -84,11 +84,11 @@ namespace Nfe.Negocio.ConsultarProtocolo
             object objRet = new object();
 
             retXmlNodeReader = new XmlNodeReader((XmlNode)obj);
-            xmlDesSerializar = new XmlSerializer(typeof(RetConsSitNFe.TRetConsSitNFe));
+            xmlDesSerializar = new XmlSerializer(typeof(retConsSitNFe.TRetConsSitNFe));
 
             objRet = xmlDesSerializar.Deserialize(retXmlNodeReader);
 
-            var Ret = (RetConsSitNFe.TRetConsSitNFe)objRet;
+            var Ret = (retConsSitNFe.TRetConsSitNFe)objRet;
 
             if (Ret.protNFe != null)
             {

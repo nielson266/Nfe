@@ -196,19 +196,19 @@ namespace Nfe.Negocio.Geral
             }
             return i;
         }
-        public static int RetornoCodigoCFOP(string CFOP)
-        {
-            int i = 0;
-            foreach (var item in Enum.GetValues(typeof(nfe.TCfop)))
-            {
-                if (item.ToString().Substring(item.ToString().Count() - 4, 4) == CFOP.ToString())
-                {
-                    break;
-                }
-                i += 1;
-            }
-            return i;
-        }
+        //public static int RetornoCodigoCFOP(string CFOP)
+        //{
+        //    int i = 0;
+        //    foreach (var item in Enum.GetValues(typeof(nfe.TCfop)))
+        //    {
+        //        if (item.ToString().Substring(item.ToString().Count() - 4, 4) == CFOP.ToString())
+        //        {
+        //            break;
+        //        }
+        //        i += 1;
+        //    }
+        //    return i;
+        //}
         public string GerarChaveAcessoNfe(int Loja,int CodFornecedor,string Uf, DateTime DtEmissao, string CnpjEmissor, string ModNfe, string Serie, string NumeroNf, string TpEmis, int Lote, out string cNF, out string cDV)
         {
             mNF = new Model_NotaFiscal();

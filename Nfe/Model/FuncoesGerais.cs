@@ -125,9 +125,9 @@ namespace Nfe.Model
 
             return result.Rows[0][0].ToString().ToUpper();
         }
-        public static string ParamatroTributacaoEmpresa()
+        public static string ParamatroTributacaoEmpresa(int loja = 1)
         {
-            var result = BancoDados.Consultar("SELECT tipo_regime FROM LOJA");
+            var result = BancoDados.Consultar("SELECT tipo_regime FROM LOJA WHERE id_loja=" + loja);
 
             return result.Rows[0][0].ToString().Trim().ToUpper();
         }

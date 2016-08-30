@@ -17,17 +17,17 @@ namespace Nfe.Negocio.InutilizacaoNfe
     {
         Entidade_Inutilizacao eObjInut;
         Model_InutilizacaoNfe mInutlizacaonfe;
-        InutNFe.TInutNFe InutilNfe;
+        inutNFe.TInutNFe InutilNfe;
         public void Enviar(Entidade_Inutilizacao ObjEnt, out Entidade_Inutilizacao objDados)
         {
             docTran = new XmlDocument();
             ns = new XmlSerializerNamespaces();
             Settings = new XmlWriterSettings();
-            xmlStatus = new XmlSerializer(typeof(InutNFe.TInutNFe));
+            xmlStatus = new XmlSerializer(typeof(inutNFe.TInutNFe));
             
             eObjInut = ObjEnt;
 
-            InutilNfe = new InutNFe.TInutNFe(ObjEnt);
+            InutilNfe = new inutNFe.TInutNFe(ObjEnt);
             eObjInut.ChaveAcessoNfe = InutilNfe.infInut.Id.Replace("ID", "");
             // E DEFINIDO O TIPO DE LEITURA DO XML
             Settings.Encoding = UTF8Encoding.UTF8;

@@ -21,7 +21,10 @@ namespace Nfe.nfe
     using System.Collections.Generic;
     using System;
 
+   
     #region Inicial
+
+    
     public partial class TNFe
     {
         public TNFe()
@@ -77,7 +80,7 @@ namespace Nfe.nfe
 
             foreach (var item in ObjNotaFiscalInf.EntItemNotaFiscal)
             {
-                ListItem.Add(new TNFeInfNFeDet(item, 0, ObjNotaFiscalInf.sSerieNf));
+                ListItem.Add(new TNFeInfNFeDet(item, 0, ObjNotaFiscalInf.sSerieNf,ObjNotaFiscalInf.Loja));
             }
             this.det = ListItem.ToArray();
             this.total = new TNFeInfNFeTotal(ObjNotaFiscalInf);
@@ -189,7 +192,12 @@ namespace Nfe.nfe
             //0=Normal;
             //1=Consumidor final;
             if (ObjNotaFiscalIde.ModNfe == 55)
-                this.indFinal = TNFeInfNFeIdeIndFinal.Item0;
+            {
+                if (ObjNotaFiscalIde.EntDest.IE.Trim() == string.Empty)
+                    this.indFinal = TNFeInfNFeIdeIndFinal.Item1;
+                else
+                    this.indFinal = TNFeInfNFeIdeIndFinal.Item0;
+            }
             else
                 this.indFinal = TNFeInfNFeIdeIndFinal.Item1;
 
@@ -381,7 +389,7 @@ namespace Nfe.nfe
             this.xMun = ObjNotaFiscalTEndereco.EntDest.sMunicipio;
             this.UF = (TUf)NegocioFuncoesGerais.RetornoCodigoUF(ObjNotaFiscalTEndereco.EntDest.sUf);
             this.CEP = ObjNotaFiscalTEndereco.EntDest.sCep;
-            this.cPais = Tpais.Item1058;
+            this.cPais = "1058";// Tpais.Item1058;
             this.xPais = "Brasil";
         }
     }
@@ -421,12 +429,12 @@ namespace Nfe.nfe
         {
 
         }
-        public TNFeInfNFeDet(Entidade_ItemNotaFiscal ObjNfeDet, int it, string serienf)
+        public TNFeInfNFeDet(Entidade_ItemNotaFiscal ObjNfeDet, int it, string serienf, int loja)
         {
             this.nItem = ObjNfeDet.NrSeqItem.ToString();
             this.prod = new TNFeInfNFeDetProd(ObjNfeDet);
 
-            this.imposto = new TNFeInfNFeDetImposto(ObjNfeDet, serienf);
+            this.imposto = new TNFeInfNFeDetImposto(ObjNfeDet, serienf, loja);
 
         }
     }
@@ -446,7 +454,8 @@ namespace Nfe.nfe
             this.cEANTrib = string.Empty;
             this.xProd = ObjNfeDetProd.DescricaoProdutos;
             this.NCM = ObjNfeDetProd.NCM;
-            this.CFOP = (TCfop)NegocioFuncoesGerais.RetornoCodigoCFOP(ObjNfeDetProd.CFOP);
+            //this.CFOP = (TCfop)NegocioFuncoesGerais.RetornoCodigoCFOP(ObjNfeDetProd.CFOP);
+            this.CFOP = ObjNfeDetProd.CFOP;
             this.uCom = ObjNfeDetProd.Unidade;
             this.qCom = string.Format("{0:N4}", ObjNfeDetProd.Qtd).ToString().Replace(".", "").Replace(",", ".");
             this.vUnCom = string.Format("{0:N10}", ObjNfeDetProd.ValorUnitario).ToString().Replace(".", "").Replace(",", ".");
@@ -466,7 +475,7 @@ namespace Nfe.nfe
     {
         public TNFeInfNFeDetImposto()
         { }
-        public TNFeInfNFeDetImposto(Entidade_ItemNotaFiscal ObjNotaFiscalImposto, string Objserienf)
+        public TNFeInfNFeDetImposto(Entidade_ItemNotaFiscal ObjNotaFiscalImposto, string Objserienf,int loja)
         {
             if (Objserienf != "9")
                 this.Items = new object[] { new object(), new object() };
@@ -475,7 +484,7 @@ namespace Nfe.nfe
 
             if (ObjNotaFiscalImposto.CSTICMS != string.Empty)
             {
-                this.Items[0] = new TNFeInfNFeDetImpostoICMS(ObjNotaFiscalImposto);
+                this.Items[0] = new TNFeInfNFeDetImpostoICMS(ObjNotaFiscalImposto, loja);
             }
             if (ObjNotaFiscalImposto.CSTPI != string.Empty && Objserienf != "9")
             {
@@ -498,9 +507,9 @@ namespace Nfe.nfe
     public partial class TNFeInfNFeDetImpostoICMS
     {
         public TNFeInfNFeDetImpostoICMS() { }
-        public TNFeInfNFeDetImpostoICMS(Entidade_ItemNotaFiscal ObjNotaFiscalImpostoICMS)
+        public TNFeInfNFeDetImpostoICMS(Entidade_ItemNotaFiscal ObjNotaFiscalImpostoICMS,int loja)
         {
-            if (FuncoesGerais.ParamatroTributacaoEmpresa() == "S")
+            if (FuncoesGerais.ParamatroTributacaoEmpresa(loja) == "S")
             {
                 if (ObjNotaFiscalImpostoICMS.ValorTotalIcms != 0)
                     this.Item = new TNFeInfNFeDetImpostoICMSICMS00(ObjNotaFiscalImpostoICMS);
@@ -532,8 +541,20 @@ namespace Nfe.nfe
 
     #region ### --- CST'S --- ###
 
-    #region  CST 101
-    public partial class TNFeInfNFeDetImpostoICMSICMSSN101
+    public partial class TNFeInfNFeDetImpostoICMSUFDest
+    {
+        public TNFeInfNFeDetImpostoICMSUFDest()
+        {
+
+        }
+        public TNFeInfNFeDetImpostoICMSUFDest(Entidade_ItemNotaFiscal ObjNotaFiscalImpostoICMSUfDest)
+        {
+            //this.
+        }
+    }
+
+        #region  CST 101
+        public partial class TNFeInfNFeDetImpostoICMSICMSSN101
     {
         public TNFeInfNFeDetImpostoICMSICMSSN101()
         {
