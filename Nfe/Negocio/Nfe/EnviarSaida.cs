@@ -270,7 +270,17 @@ namespace Nfe.Negocio.Nfe
                     if (DtNotaFiscal.Rows[0]["CdUf_Destinatario"].ToString() == DtNotaFiscal.Rows[0]["CdUf_Emitente"].ToString())
                         ObjNotaFiscal.TipoOperacao = 1;
                     else
+                    {
                         ObjNotaFiscal.TipoOperacao = 2;
+                        // VALIDAÇÃO DE OPERAÇÃO INTERESTADUAL APENAS EMPRESA PRESUMIDO E REAL PARTICIPAM
+                        if (FuncoesGerais.ParamatroTributacaoEmpresa() != "0")
+                        {
+                            if(NFuncoes.TiraCampos(DtNotaFiscal.Rows[0]["CdCpfCgc_Destinatario"].ToString()).Trim().Length == 11)
+                                ObjNotaFiscal.OpInterestadual = true;
+                            else
+                                ObjNotaFiscal.OpInterestadual = false;
+                        }
+                    }
 
                     if (TipoEmissao.Trim() == "1")
                         ObjNotaFiscal.TpEmis = 1;

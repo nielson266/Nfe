@@ -127,7 +127,7 @@ namespace Nfe.Model
         }
         public static string ParamatroTributacaoEmpresa(int loja = 1)
         {
-            var result = BancoDados.Consultar("SELECT tipo_regime FROM LOJA WHERE id_loja=" + loja);
+            var result = BancoDados.Consultar("SELECT tipo_regime FROM LOJA WHERE id=" + loja);
 
             return result.Rows[0][0].ToString().Trim().ToUpper();
         }

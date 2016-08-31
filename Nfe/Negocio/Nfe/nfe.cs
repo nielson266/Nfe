@@ -295,6 +295,8 @@ namespace Nfe.nfe
             this.IE = ObjNotaFiscalEmit.EntEmit.IE;
             if (FuncoesGerais.ParamatroTributacaoEmpresa() == "0")
                 this.CRT = TNFeInfNFeEmitCRT.Item1;
+            else if (FuncoesGerais.ParamatroTributacaoEmpresa() == "1")
+                this.CRT = TNFeInfNFeEmitCRT.Item2;
             else
                 this.CRT = TNFeInfNFeEmitCRT.Item3;
         }

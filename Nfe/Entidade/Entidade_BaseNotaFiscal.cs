@@ -24,6 +24,7 @@ namespace Nfe.Entidade
         public string NaturezaOperacao { get; set; }
         public int TipoOperacao { get; set; }
         public int TipoPagamento { get; set; }
+        public bool OpInterestadual { get; set; }
         /// <summary>
         /// Referice ao cDV da Nfe
         /// </summary>
