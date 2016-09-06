@@ -5577,9 +5577,9 @@ namespace Nfe.nfe {
         
         private TNFeInfNFeDetImpostoICMSICMS40CST cSTField;
         
-        private string vICMSDesonField;
+        //private string vICMSDesonField;
         
-        private TNFeInfNFeDetImpostoICMSICMS40MotDesICMS motDesICMSField;
+        //private TNFeInfNFeDetImpostoICMSICMS40MotDesICMS motDesICMSField;
         
         /// <remarks/>
         public Torig orig {
@@ -5602,24 +5602,24 @@ namespace Nfe.nfe {
         }
         
         /// <remarks/>
-        public string vICMSDeson {
-            get {
-                return this.vICMSDesonField;
-            }
-            set {
-                this.vICMSDesonField = value;
-            }
-        }
+        //public string vICMSDeson {
+        //    get {
+        //        return this.vICMSDesonField;
+        //    }
+        //    set {
+        //        this.vICMSDesonField = value;
+        //    }
+        //}
         
-        /// <remarks/>
-        public TNFeInfNFeDetImpostoICMSICMS40MotDesICMS motDesICMS {
-            get {
-                return this.motDesICMSField;
-            }
-            set {
-                this.motDesICMSField = value;
-            }
-        }
+        ///// <remarks/>
+        //public TNFeInfNFeDetImpostoICMSICMS40MotDesICMS motDesICMS {
+        //    get {
+        //        return this.motDesICMSField;
+        //    }
+        //    set {
+        //        this.motDesICMSField = value;
+        //    }
+        //}
     }
     
     /// <remarks/>

@@ -11,9 +11,9 @@ namespace Nfe.Model
     {
         public DataTable LotesNaoProcessados()
         {
-            return BancoDados.Consultar(" SELECT L.id_loja, CdRetorno, DtEnvio, DtRecSefaz, DtResultProcSefaz, NrLote, NrRecibo, NrTempoProcSefaz, StLote, TpNFe, Uf \n" +
-                                        " FROM LoteNFe LT () INNER JOIN Loja L () ON LT.id_loja = L.id_loja \n " +
-                                        " WHERE (CdRetorno IN (103, 105)) and DtRecSefaz >='05/01/2015'");
+            return BancoDados.Consultar(" SELECT L.id, CdRetorno, DtEnvio, DtRecSefaz, DtResultProcSefaz, NrLote, NrRecibo, NrTempoProcSefaz, StLote, TpNFe, Uf \n" +
+                                        " FROM LoteNFe LT INNER JOIN Loja L ON LT.id_loja = L.id \n " +
+                                        " WHERE (CdRetorno IN (103, 105))");
         }
         public void UpdateLoteRecebidos(string StatusLote, DateTime RecSefaz, string NrTempoProcSefaz, string NumeroRecibo, string Retorno, string NrLote, int Loja)
         {
@@ -38,7 +38,7 @@ namespace Nfe.Model
         {
             BancoDados.InsertAlterarExcluir(" UPDATE LoteNFe "+
                                             " SET StLote = 'P', CdRetorno =" + Retorno +", DtResultProcSefaz = '"+ string.Format("{0:dd/MM/yyyy HH:mm:ss}", DtProcessamento) +"' "+
-                                            " WHERE (NrRecibo = " + Recibo + ")");
+                                            " WHERE (NrRecibo = '" + Recibo + "')");
 
             return true;
         }

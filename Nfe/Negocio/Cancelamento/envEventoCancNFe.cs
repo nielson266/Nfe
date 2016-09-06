@@ -77,10 +77,11 @@ namespace Nfe.envEventoCancNFe
 
             this.ItemElementName = ItemChoiceType.CNPJ;
 
-            if (EvenInfCancelamento.Ambiente == "PROD")
-                this.Item = EvenInfCancelamento.CnpjCpf;
-            else
-                this.Item = "06317980000137";
+            this.Item = EvenInfCancelamento.CnpjCpf;
+            ////if (EvenInfCancelamento.Ambiente == "PROD")
+            //this.Item = EvenInfCancelamento.CnpjCpf;
+            ////else
+            // //   this.Item = "06317980000137";
 
             this.dhEvento = string.Format("{0:s}", Convert.ToDateTime(EvenInfCancelamento.DataHora)) + "-03:00";
             this.tpEvento = TEventoInfEventoTpEvento.Item110111;

@@ -33,10 +33,10 @@ namespace Nfe
 
             /// Iniciar pausado para manuntenção 16/08/2016
 
-            TmStatus.Enabled = true;
-            //TmInutilizacao.Enabled = true;
+            //TmStatus.Enabled = true;
+            TmInutilizacao.Enabled = true;
             //TmCancelamento.Enabled = true;
-            TmNotaFiscal.Enabled = true;
+            //TmNotaFiscal.Enabled = true;
             //TmConsultaLote.Enabled = true;
             //TmEntrada.Enabled = true;
             //TmSemRetorno.Enabled = true;
@@ -62,6 +62,8 @@ namespace Nfe
             Model_InutilizacaoNfe mInut = new Model_InutilizacaoNfe();
             EnviarInutilizacao nEnvInut = new EnviarInutilizacao();
 
+            TmInutilizacao.Enabled = false;
+
             var dtInut = mInut.Pesquisar();
 
             for (int i = 0; i < dtInut.Rows.Count; i++)
@@ -69,15 +71,17 @@ namespace Nfe
                 eInut = new Entidade_Inutilizacao();
 
                 eInut.Loja = int.Parse(dtInut.Rows[i]["id_loja"].ToString());
-                eInut.cUf = int.Parse(dtInut.Rows[i]["UF"].ToString());
-                eInut.Cnpj = dtInut.Rows[i]["CdCpfCgc"].ToString();
+                eInut.cUf = Convert.ToInt32(dtInut.Rows[i]["cdUfCidadeIbge_Empresa"].ToString().Substring(0, dtInut.Rows[i]["cdUfCidadeIbge_Empresa"].ToString().Length - 5));
+                eInut.Cnpj = dtInut.Rows[i]["cnpj"].ToString();
                 eInut.sSerieNf = dtInut.Rows[i]["serienf"].ToString().Trim();
-                eInut.NrIni = int.Parse(dtInut.Rows[i]["NrNf"].ToString());
-                eInut.NrFim = int.Parse(dtInut.Rows[i]["NrNf"].ToString());
+                eInut.NrIni = int.Parse(dtInut.Rows[i]["numero_ini"].ToString());
+                eInut.NrFim = int.Parse(dtInut.Rows[i]["numero_fim"].ToString());
                 eInut.ModNfe = int.Parse(dtInut.Rows[i]["ModNfe"].ToString());
                 eInut.TpAmbiente = FuncoesGerais.TipoAmbiente();
                 nEnvInut.Enviar(eInut, out eInut);
             }
+
+            TmInutilizacao.Enabled = true;
         }
 
         private void TmCancelamento_Tick(object sender, EventArgs e)
@@ -95,15 +99,15 @@ namespace Nfe
             {
                 envCancelamento = new EnviarCancelamentoSefaz();
 
-                eCancelamento.id = Convert.ToInt32(dtCancelamento.Rows[i]["CdOperacao"]);
+                eCancelamento.id = Convert.ToInt32(dtCancelamento.Rows[i]["idoperacao"]);
                 eCancelamento.Loja = Convert.ToInt32(dtCancelamento.Rows[i]["id_loja"]);
-                eCancelamento.CdFornec = dtCancelamento.Rows[i]["CdFornec"] != null ? Convert.ToInt32(dtCancelamento.Rows[i]["CdFornec"]) : 0;
+                //eCancelamento.CdFornec = dtCancelamento.Rows[i]["CdFornec"] != null ? Convert.ToInt32(dtCancelamento.Rows[i]["CdFornec"]) : 0;
                 eCancelamento.NmSerie = dtCancelamento.Rows[i]["serienf"].ToString();
-                eCancelamento.CnpjCpf = dtCancelamento.Rows[i]["CdCpfCgc"].ToString();
-                eCancelamento.ProtocoloAutoriz = dtCancelamento.Rows[i]["NrProtocoloAutorizNfe"].ToString().Trim();
-                eCancelamento.ChaveAcessoNfe = dtCancelamento.Rows[i]["TxChAcessoNfe"].ToString();
                 eCancelamento.NrNf = Convert.ToInt32(dtCancelamento.Rows[i]["NrNF"].ToString());
+                eCancelamento.CnpjCpf = dtCancelamento.Rows[i]["cnpj"].ToString();
+                eCancelamento.ChaveAcessoNfe = dtCancelamento.Rows[i]["TxChAcessoNfe"].ToString();
                 eCancelamento.TpNf = dtCancelamento.Rows[i]["TpNFe"].ToString();
+                eCancelamento.ProtocoloAutoriz = dtCancelamento.Rows[i]["NrProtocoloAutorizNfe"].ToString().Trim();
                 eCancelamento.cUf = Convert.ToInt32(dtCancelamento.Rows[i]["cdUfCidadeIbge_Empresa"].ToString().Substring(0, dtCancelamento.Rows[i]["cdUfCidadeIbge_Empresa"].ToString().Length - 5));
                 eCancelamento.CodigoIbgeEmpresa = dtCancelamento.Rows[i]["cdUfCidadeIbge_Empresa"].ToString();
                 eCancelamento.DataHora = dtCancelamento.Rows[i]["DtOperacao"].ToString();
@@ -281,8 +285,8 @@ namespace Nfe
             {
                 eRec.TpNf = retDt.Rows[i]["TpNFe"].ToString();
                 eRec.Recibo = retDt.Rows[i]["NrRecibo"].ToString();
-                eRec.Loja = int.Parse(retDt.Rows[i]["id_loja"].ToString());
-                eRec.cUf = int.Parse(FuncoesGerais.UfIbgeEmpresa(int.Parse(retDt.Rows[i]["id_loja"].ToString())));
+                eRec.Loja = int.Parse(retDt.Rows[i]["id"].ToString());
+                eRec.cUf = int.Parse(FuncoesGerais.UfIbgeEmpresa(int.Parse(retDt.Rows[i]["id"].ToString())));
                 eRec.TpAmb = FuncoesGerais.TipoAmbiente();
                 nRec.Enviar(eRec, out eRec);
             }

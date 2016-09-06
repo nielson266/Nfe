@@ -132,6 +132,7 @@ namespace Nfe.Negocio.ConsultaRecibo
                                     if (xNodListProc2.Item(j).Name.Equals("chNFe"))
                                     {
                                         xProtNFe = xNodList.Item(i).OuterXml;
+                                        break;
                                     }
                                 }
                             }
@@ -158,6 +159,10 @@ namespace Nfe.Negocio.ConsultaRecibo
             {
                 Mensagem.MensagemErro(Mensagem.TipoMensagem.RetAutoriz, "Saida", Ex.Message.ToString());
 
+                if (!Directory.Exists(@"C:\NFe\Retorno_Proc_NFe\"))
+                {
+                    Directory.CreateDirectory(@"C:\NFe\Retorno_Proc_NFe\");
+                }
                 FileStream FS = new FileStream(@"C:\NFe\Retorno_Proc_NFe\" + string.Format("{0:MMddyyyy}", DateTime.Now.Date) + "_" + Retorno.nRec.Trim() + ".xml", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
                 SW = new StreamWriter(FS);
 

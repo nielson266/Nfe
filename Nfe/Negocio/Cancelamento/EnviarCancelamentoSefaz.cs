@@ -134,7 +134,7 @@ namespace Nfe.Negocio.Cancelamento
                             else
                                 mCancelamento.UpdateNfEntradaCancelamento(101, item.infEvento.nProt, EntCa.Loja, EntCa.NmSerie.Trim(), EntCa.NrNf.ToString(), EntCa.CdFornec);
 
-                            mCancelamento.TramitacaoNfe(EntCa.Loja, EntCa.NmSerie.Trim(), EntCa.NrNf.ToString(), EntCa.CdFornec, 0, "Cancelamento autorizado");
+                            //mCancelamento.TramitacaoNfe(EntCa.Loja, EntCa.NmSerie.Trim(), EntCa.NrNf.ToString(), EntCa.CdFornec, 0, "Cancelamento autorizado");
                         }
                         else
                         {

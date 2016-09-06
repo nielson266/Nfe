@@ -22,7 +22,7 @@ namespace Nfe.Model
         }
         public bool Salvar(Entidade_Inutilizacao ObjDados)
         {
-            BancoDados.InsertAlterarExcluir("UPDATE InutilizacaoNFe Set CdRetorno=" + ObjDados.CdRetorno + ",TxChAcessoInutilizNfe='" + ObjDados.ChaveAcessoNfe + "' WHERE NrNf = " + ObjDados.NrIni + " AND id_loja = " + ObjDados.Loja);
+            BancoDados.InsertAlterarExcluir("UPDATE InutilizacaoNFe Set CdRetorno=" + ObjDados.CdRetorno + ",TxChAcessoInutilizNfe='" + ObjDados.ChaveAcessoNfe + "' WHERE numero_ini = " + ObjDados.NrIni + " AND numero_fim = " + ObjDados.NrFim +"  AND id_loja = " + ObjDados.Loja);
             return true;
         }
         public bool Deletar(Entidade_Inutilizacao ObjDados)
@@ -37,8 +37,8 @@ namespace Nfe.Model
 
                 BancoDados.OpenConection();
 
-                NpgsqlCommand command = new NpgsqlCommand("SpConsultaInutilizacoesSolicitadas", BancoDados.conexao);
-                command.CommandType = CommandType.StoredProcedure;
+                NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM vw_inutilizacaonfe", BancoDados.conexao);
+                command.CommandType = CommandType.Text;
                 dtReader = command.ExecuteReader();
 
                 dtReturn.Load(dtReader);

@@ -347,6 +347,7 @@ namespace Nfe.Model
         {
             if (TipoNF == NotaFiscal.Saida)
             {
+                
                 BancoDados.InsertAlterarExcluir(" UPDATE    NfSaida \n" +
                                                 " SET              CdRetorno = " + retorno + ", NrProtocoloAutorizNfe = " + ProtAutoriz + " \n" +
                                                 " WHERE     (id_loja = " + loja + ") AND (TxChAcessoNFe = '" + ChAcessoNfe + "')");
