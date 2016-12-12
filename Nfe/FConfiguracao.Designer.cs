@@ -54,7 +54,7 @@
             // 
             // TmStatus
             // 
-            this.TmStatus.Interval = 10000;
+            this.TmStatus.Interval = 120000;
             this.TmStatus.Tick += new System.EventHandler(this.TmStatus_Tick);
             // 
             // TmInutilizacao
@@ -64,7 +64,7 @@
             // 
             // TmCancelamento
             // 
-            this.TmCancelamento.Interval = 120000;
+            this.TmCancelamento.Interval = 30000;
             this.TmCancelamento.Tick += new System.EventHandler(this.TmCancelamento_Tick);
             // 
             // TmNotaFiscal

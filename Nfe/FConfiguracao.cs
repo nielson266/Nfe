@@ -33,13 +33,13 @@ namespace Nfe
 
             /// Iniciar pausado para manuntenção 16/08/2016
 
-            //TmStatus.Enabled = true;
+            TmStatus.Enabled = true;
             TmInutilizacao.Enabled = true;
-            //TmCancelamento.Enabled = true;
-            //TmNotaFiscal.Enabled = true;
-            //TmConsultaLote.Enabled = true;
+            TmCancelamento.Enabled = true;
+            TmNotaFiscal.Enabled = true;
+            TmConsultaLote.Enabled = true;
             //TmEntrada.Enabled = true;
-            //TmSemRetorno.Enabled = true;
+            TmSemRetorno.Enabled = true;
             //sBtnSemRetorno.Image = Inicializar();
 
         }
@@ -278,8 +278,6 @@ namespace Nfe
             eRec = new Entidade_Recibo();
 
             var retDt = mLote.LotesNaoProcessados();
-
-            
 
             for (int i = 0; i < retDt.Rows.Count; i++)
             {

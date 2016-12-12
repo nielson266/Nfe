@@ -54,10 +54,10 @@ namespace Nfe.Model
                 NpgsqlCommand command = new NpgsqlCommand(" UPDATE CancelamentoNFe SET CdRetorno = @CdRetorno" +
                                                           " WHERE (id_loja = @id_loja) AND (serienf = @serienf) AND (NrNf = @NrNf)", BancoDados.conexao);
                 command.CommandType = CommandType.Text;
-                command.Parameters.AddWithValue("CdRetorno", cdRetorno);
-                command.Parameters.AddWithValue("id_loja", loja);
-                command.Parameters.AddWithValue("serienf", SerieNf);
-                command.Parameters.AddWithValue("NrNf", notafiscal);
+                command.Parameters.AddWithValue("@CdRetorno", Convert.ToInt32(cdRetorno));
+                command.Parameters.AddWithValue("@id_loja", loja);
+                command.Parameters.AddWithValue("@serienf", SerieNf);
+                command.Parameters.AddWithValue("@NrNf", Convert.ToInt32(notafiscal));
                 //command.Parameters.AddWithValue("@CdFornec", cdFornec);
 
                 command.ExecuteNonQuery();
@@ -83,14 +83,14 @@ namespace Nfe.Model
             {
                 BancoDados.OpenConection();
 
-                NpgsqlCommand command = new NpgsqlCommand(" UPDATE NfSaida SET CdRetorno = @CdRetorno, NrProtocoloCancelInutilizNfe = '@NrProtocoloCancelInutilizNfe' " +
+                NpgsqlCommand command = new NpgsqlCommand(" UPDATE NfSaida SET CdRetorno = @CdRetorno, NrProtocoloCancelInutilizNfe = @NrProtocoloCancelInutilizNfe " +
                                                     " WHERE  (id_loja = @id_loja) AND (serienf = @serienf) AND (NrNf = @NrNf)", BancoDados.conexao);
                 command.CommandType = CommandType.Text;
-                command.Parameters.AddWithValue("CdRetorno", cdRetorno);
-                command.Parameters.AddWithValue("NrProtocoloCancelInutilizNfe", ProtocoloAutorizacao == null ? "0" : ProtocoloAutorizacao);
-                command.Parameters.AddWithValue("id_loja", loja);
-                command.Parameters.AddWithValue("serienf", SerieNf);
-                command.Parameters.AddWithValue("NrNf", notafiscal);
+                command.Parameters.AddWithValue("@CdRetorno", cdRetorno);
+                command.Parameters.AddWithValue("@NrProtocoloCancelInutilizNfe", ProtocoloAutorizacao == null ? "0" : ProtocoloAutorizacao);
+                command.Parameters.AddWithValue("@id_loja", loja);
+                command.Parameters.AddWithValue("@serienf", SerieNf);
+                command.Parameters.AddWithValue("@NrNf", Convert.ToInt32(notafiscal));
 
                 command.ExecuteNonQuery();
 
