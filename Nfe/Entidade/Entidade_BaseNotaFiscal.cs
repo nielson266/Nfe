@@ -38,6 +38,8 @@ namespace Nfe.Entidade
         public string NrEquipamento { get; set; }
         public string ChaveNfeReferida { get; set; }
         public string Observacao { get; set; }
+        public string ObservacaoFisco { get; set; }
+        public string ObservacaoContribuinte { get; set; }
         public int TipoFInalidadeNfe { get; set; }
         public int Lote { get; set; }
     }

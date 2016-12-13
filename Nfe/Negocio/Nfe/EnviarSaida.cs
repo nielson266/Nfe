@@ -261,6 +261,8 @@ namespace Nfe.Negocio.Nfe
                     ObjNotaFiscal.DtEmissao = Convert.ToDateTime(DtNotaFiscal.Rows[0]["DtSaida"].ToString());
                     //ObjNotaFiscal.Observacao = NFuncoes.TiraCampos(DtNotaFiscal.Rows[0]["Observacao"].ToString().Trim() + ":" + DtNotaFiscal.Rows[0]["MensagemOrcamento"].ToString().Trim() + ":" + DtNotaFiscal.Rows[0]["MensagemComprovanteDeposito"].ToString().Trim() + " | " + DtNotaFiscal.Rows[0]["MensagemLocalEntrega"].ToString().Trim() + ":" + DtNotaFiscal.Rows[0]["MensagemParamVenda"].ToString().Trim() + "|" + DtNotaFiscal.Rows[0]["CdVendedor"].ToString().Trim() + " " + DtNotaFiscal.Rows[0]["NmVendedor"].ToString().Trim() + ". Prazo : " + DtNotaFiscal.Rows[0]["NmPrazo"].ToString().Trim() + ". Rota:" + DtNotaFiscal.Rows[0]["nrRotaGP"].ToString().Trim());
                     ObjNotaFiscal.Observacao = NFuncoes.TiraCampos(DtNotaFiscal.Rows[0]["Observacao"].ToString().Trim());
+                    ObjNotaFiscal.ObservacaoFisco = NFuncoes.TiraCampos(DtNotaFiscal.Rows[0]["mensagemfisco"].ToString().Trim());
+                    ObjNotaFiscal.ObservacaoContribuinte = NFuncoes.TiraCampos(DtNotaFiscal.Rows[0]["mensagemcontribuinte"].ToString().Trim());
                     ObjNotaFiscal.ChaveAcessoNfe = DtNotaFiscal.Rows[0]["TxChAcessoNFe"].ToString().Trim();
                     ObjNotaFiscal.CdNfe = string.IsNullOrEmpty(DtNotaFiscal.Rows[0]["cdNFe"].ToString()) ? 0 : int.Parse(DtNotaFiscal.Rows[0]["cdNFe"].ToString());
                     if (tipoNf == "E")

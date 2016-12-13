@@ -21,10 +21,10 @@ namespace Nfe.nfe
     using System.Collections.Generic;
     using System;
 
-   
+
     #region Inicial
 
-    
+
     public partial class TNFe
     {
         public TNFe()
@@ -80,7 +80,7 @@ namespace Nfe.nfe
 
             foreach (var item in ObjNotaFiscalInf.EntItemNotaFiscal)
             {
-                ListItem.Add(new TNFeInfNFeDet(item, 0, ObjNotaFiscalInf.sSerieNf,ObjNotaFiscalInf.Loja));
+                ListItem.Add(new TNFeInfNFeDet(item, 0, ObjNotaFiscalInf.sSerieNf, ObjNotaFiscalInf.Loja));
             }
             this.det = ListItem.ToArray();
             this.total = new TNFeInfNFeTotal(ObjNotaFiscalInf);
@@ -107,7 +107,7 @@ namespace Nfe.nfe
 
             }
 
-            if (ObjNotaFiscalInf.Observacao.Trim() != string.Empty)
+            if (ObjNotaFiscalInf.ObservacaoContribuinte.Trim() != string.Empty || (ObjNotaFiscalInf.ObservacaoFisco.Trim() != string.Empty))
             {
                 this.infAdic = new TNFeInfNFeInfAdic(ObjNotaFiscalInf);
             }
@@ -475,7 +475,7 @@ namespace Nfe.nfe
     {
         public TNFeInfNFeDetImposto()
         { }
-        public TNFeInfNFeDetImposto(Entidade_ItemNotaFiscal ObjNotaFiscalImposto, string Objserienf,int loja)
+        public TNFeInfNFeDetImposto(Entidade_ItemNotaFiscal ObjNotaFiscalImposto, string Objserienf, int loja)
         {
             if (Objserienf != "9")
                 this.Items = new object[] { new object(), new object() };
@@ -507,7 +507,7 @@ namespace Nfe.nfe
     public partial class TNFeInfNFeDetImpostoICMS
     {
         public TNFeInfNFeDetImpostoICMS() { }
-        public TNFeInfNFeDetImpostoICMS(Entidade_ItemNotaFiscal ObjNotaFiscalImpostoICMS,int loja)
+        public TNFeInfNFeDetImpostoICMS(Entidade_ItemNotaFiscal ObjNotaFiscalImpostoICMS, int loja)
         {
             if (FuncoesGerais.ParamatroTributacaoEmpresa(loja) == "S")
             {
@@ -553,8 +553,8 @@ namespace Nfe.nfe
         }
     }
 
-        #region  CST 101
-        public partial class TNFeInfNFeDetImpostoICMSICMSSN101
+    #region  CST 101
+    public partial class TNFeInfNFeDetImpostoICMSICMSSN101
     {
         public TNFeInfNFeDetImpostoICMSICMSSN101()
         {
@@ -1287,10 +1287,13 @@ namespace Nfe.nfe
         }
         public TNFeInfNFeInfAdic(Entidade_NotaFiscal ObjNfeObs)
         {
-            if (ObjNfeObs.sSerieNf.Trim() != "9")
-                this.infAdFisco = ObjNfeObs.Observacao;
-            else
-                this.infCpl = ObjNfeObs.Observacao;
+            //if (ObjNfeObs.sSerieNf.Trim() != "9")
+            //    this.infAdFisco = ObjNfeObs.ChaveNfeReferida;
+            //else
+            //    this.infCpl = ObjNfeObs.Observacao;
+
+            this.infAdFisco = ObjNfeObs.ObservacaoFisco;
+            this.infCpl = ObjNfeObs.ObservacaoContribuinte;
         }
     }
     #endregion
