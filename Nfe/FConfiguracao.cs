@@ -22,6 +22,7 @@ using Nfe.Negocio.CartaEletronica;
 using Nfe.Negocio.EnviarEmail;
 using Nfe.Model;
 using Nfe.Negocio;
+using Nfe.Negocio.Manifestacao;
 
 namespace Nfe
 {
@@ -33,14 +34,14 @@ namespace Nfe
 
             /// Iniciar pausado para manuntenção 16/08/2016
 
-            TmStatus.Enabled = true;
-            TmInutilizacao.Enabled = true;
-            TmCancelamento.Enabled = true;
-            TmNotaFiscal.Enabled = true;
-            TmConsultaLote.Enabled = true;
-            //TmEntrada.Enabled = true;
-            TmSemRetorno.Enabled = true;
-            //sBtnSemRetorno.Image = Inicializar();
+            //TmStatus.Enabled = true;
+            //TmInutilizacao.Enabled = true;
+            //TmCancelamento.Enabled = true;
+            //TmNotaFiscal.Enabled = true;
+            //TmConsultaLote.Enabled = true;
+            ////TmEntrada.Enabled = true;
+            //TmSemRetorno.Enabled = true;
+            ////sBtnSemRetorno.Image = Inicializar();
 
         }
 
@@ -55,6 +56,7 @@ namespace Nfe
         Model_CCe mCartaEletronica;
         Model_XmlCliente mXmlCliente;
         NegocioFuncoesGerais NFuncoes;
+        Model_Manisfestacao mManifestacao;
 
 
         private void TmInutilizacao_Tick(object sender, EventArgs e)
@@ -186,12 +188,12 @@ namespace Nfe
             if (TmSemRetorno.Enabled == true)
             {
                 TmSemRetorno.Enabled = false;
-                
+
             }
             else
             {
                 TmSemRetorno.Enabled = true;
-                
+
             }
         }
 
@@ -200,7 +202,7 @@ namespace Nfe
             if (TmEnviarEmailCliente.Enabled == true)
             {
                 TmEnviarEmailCliente.Enabled = false;
-                
+
             }
             else
             {
@@ -259,7 +261,7 @@ namespace Nfe
             if (TmInutilizacao.Enabled == true)
             {
                 TmInutilizacao.Enabled = false;
-                
+
             }
             else
             {
@@ -404,7 +406,7 @@ namespace Nfe
             if (TmCancelamento.Enabled == false)
             {
                 TmCancelamento.Enabled = true;
-                
+
             }
             else
             {
@@ -424,6 +426,8 @@ namespace Nfe
             }
         }
 
+
+        #region --------- TIMER CARTA ELETRONICA ---------
         private void TmCartaEletronica_Tick(object sender, EventArgs e)
         {
 
@@ -435,7 +439,9 @@ namespace Nfe
 
             TmCartaEletronica.Enabled = true;
         }
+        #endregion
 
+        #region --------- TIMER ENVIAR EMAIL CLIENTE ---------
         private void TmEnviarEmailCliente_Tick(object sender, EventArgs e)
         {
             EnviarEmail EnvEmail = new EnviarEmail();
@@ -481,6 +487,9 @@ namespace Nfe
             TmEnviarEmailCliente.Enabled = true;
 
         }
+        #endregion
+
+        #region --------- MONTA HTML ---------
         public string MontarHtml(string NotaFiscal, string ChaveAcesso, string Empresa, string Cliente)
         {
             StringBuilder Sb = new StringBuilder();
@@ -507,6 +516,55 @@ namespace Nfe
             Sb.Append("<p><i>Para alterar seu e-mail de recepção entre em contato</i></p>");
 
             return Sb.ToString();
+        }
+        #endregion
+
+        private void TmConsultaNFeDestinatario_Tick(object sender, EventArgs e)
+        {
+            TmConsultaNFeDestinatario.Enabled = false;
+            EnviarConsultaDestinatario ObjConDest = new EnviarConsultaDestinatario();
+            Entidade_ConsNFDest ObjRet = new Entidade_ConsNFDest();
+            ObjConDest.Enviar(null, out ObjRet);
+
+            TmConsultaNFeDestinatario.Enabled = true;
+        }
+
+        private void TmManifestacao_Tick(object sender, EventArgs e)
+        {
+
+            TmManifestacao.Enabled = false;
+            mManifestacao = new Model_Manisfestacao();
+            Entidade_Manifestacao EntManifestacao = new Entidade_Manifestacao();
+            Entidade_ItemManifestacao EntItemManifestacao;
+
+            List<Entidade_ItemManifestacao> EntListItemManifestacao = new List<Entidade_ItemManifestacao>();
+            //Retorna todas que estão com retorno null
+            var DtRetManifestacao = mManifestacao.ConsultaManifestacao();
+
+            if (DtRetManifestacao.Rows.Count > 0)
+            {
+                EntManifestacao.id = Convert.ToInt32(DtRetManifestacao.Rows[0]["id"]);
+                EntManifestacao.dtManifestacao = Convert.ToDateTime(DtRetManifestacao.Rows[0]["dtmanifestacao"]);
+                EntManifestacao.id_loja = Convert.ToInt32(DtRetManifestacao.Rows[0]["id_loja"]);
+
+                for (int i = 0; i < DtRetManifestacao.Rows.Count; i++)
+                {
+                    EntItemManifestacao = new Entidade_ItemManifestacao();
+
+                    EntItemManifestacao.id = Convert.ToInt32(DtRetManifestacao.Rows[i]["iditem"]);
+                    EntItemManifestacao.chaveacesso = DtRetManifestacao.Rows[i]["txchacessonfe"].ToString();
+                    EntItemManifestacao.codmanifestacao = Convert.ToInt32(DtRetManifestacao.Rows[i]["codmanifestacao"]);
+                    EntItemManifestacao.idseq = Convert.ToInt32(DtRetManifestacao.Rows[i]["idseq"]);
+                    EntListItemManifestacao.Add(EntItemManifestacao);
+                }
+                EntManifestacao.ListNfeManifestacao = EntListItemManifestacao;
+
+                EnviarManifestacao ObjNegManifestaca = new EnviarManifestacao();
+
+                ObjNegManifestaca.Enviar(EntManifestacao, out EntManifestacao);
+            }
+
+            TmManifestacao.Enabled = true;
 
         }
     }

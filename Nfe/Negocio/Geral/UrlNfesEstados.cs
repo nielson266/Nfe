@@ -40,7 +40,8 @@ namespace Nfe.Negocio.Geral
             SC,
             SP,
             SE,
-            TO
+            TO,
+            AN
         }
         #endregion
 
@@ -192,6 +193,18 @@ namespace Nfe.Negocio.Geral
         {
             switch (UF)
             {
+                case Estado.AN:
+                    {
+                        if (tpUrlEnvio == TipoUrlEnvio.RecepcaoEvento)
+                        {
+                            if (Amb == tbAmbiente.PROD)
+                                return "https://www.nfe.fazenda.gov.br/RecepcaoEvento/RecepcaoEvento.asmx";
+                            else
+                                return "";
+                        }
+                        else
+                            return string.Empty;
+                    }
                 case Estado.AL:
                     {
                         if (tpUrlEnvio == TipoUrlEnvio.StatusServico)

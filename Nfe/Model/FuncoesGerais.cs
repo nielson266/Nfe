@@ -113,6 +113,7 @@ namespace Nfe.Model
                 return false;
             }
         }
+
         public static string TipoAmbiente()
         {
             var result = BancoDados.Consultar("SELECT VALOR FROM ConfiguracaoNfe WHERE Chave='AMBIENTE'");
@@ -179,6 +180,11 @@ namespace Nfe.Model
                 BancoDados.CloseConection();
                 throw new Exception(ex.Message.ToString());
             }
+        }
+
+        public static DataTable Loja(int Loja)
+        {
+            return BancoDados.Consultar("SELECT * FROM Loja where id=" + Loja);
         }
         public static string UfIbgeEmpresa(int Loja)
         {

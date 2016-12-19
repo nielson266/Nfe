@@ -18,7 +18,8 @@ namespace Nfe.Negocio.Geral
              Reenvio,
              Status,
              XmlLoteGerados,
-             CartaEletronica
+             CartaEletronica,
+             Manifestacao
          }
 
          public TipoMensagem EnumTipoMensagem;
@@ -43,7 +44,15 @@ namespace Nfe.Negocio.Geral
                  vWriter.Flush();
                  vWriter.Close();
              }
-             else if (SelecioneMensagem == TipoMensagem.XmlLoteGerados)
+            if (SelecioneMensagem == TipoMensagem.Manifestacao)
+            {
+                vWriter = new StreamWriter(@"c:\MensagensNFe\ManifestacaoNFe.txt", true);
+                vWriter.WriteLine("Servico Manifestacao: " + DateTime.Now.ToString());
+                vWriter.WriteLine("Servico Nfe: " + Mensagem);
+                vWriter.Flush();
+                vWriter.Close();
+            }
+            else if (SelecioneMensagem == TipoMensagem.XmlLoteGerados)
              {
                  vWriter = new StreamWriter(@"c:\MensagensNFe\LotesGerados.txt", true);
                  vWriter.WriteLine("Lote: " + DateTime.Now.ToString());

@@ -23,5 +23,8 @@
     <Setting Name="Nfe_RecepcaoEvento_RecepcaoEvento" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://hom.sefazvirtual.fazenda.gov.br/RecepcaoEvento/RecepcaoEvento.asmx</Value>
     </Setting>
+    <Setting Name="Nfe_NFeConsultaDest_NFeConsultaDest" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://www.nfe.fazenda.gov.br/NFeConsultaDest/NFeConsultaDest.asmx</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

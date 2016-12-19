@@ -50,6 +50,8 @@
             this.TmXmlCliente = new System.Windows.Forms.Timer(this.components);
             this.TmEnviarEmailCliente = new System.Windows.Forms.Timer(this.components);
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.TmConsultaNFeDestinatario = new System.Windows.Forms.Timer(this.components);
+            this.TmManifestacao = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // TmStatus
@@ -204,6 +206,17 @@
             this.checkBox1.Text = "Off";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
+            // TmConsultaNFeDestinatario
+            // 
+            this.TmConsultaNFeDestinatario.Interval = 300000;
+            this.TmConsultaNFeDestinatario.Tick += new System.EventHandler(this.TmConsultaNFeDestinatario_Tick);
+            // 
+            // TmManifestacao
+            // 
+            this.TmManifestacao.Enabled = true;
+            this.TmManifestacao.Interval = 30000;
+            this.TmManifestacao.Tick += new System.EventHandler(this.TmManifestacao_Tick);
+            // 
             // FConfiguracao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -251,5 +264,7 @@
         private System.Windows.Forms.Timer TmXmlCliente;
         private System.Windows.Forms.Timer TmEnviarEmailCliente;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Timer TmConsultaNFeDestinatario;
+        private System.Windows.Forms.Timer TmManifestacao;
     }
 }

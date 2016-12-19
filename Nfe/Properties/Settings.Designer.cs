@@ -92,5 +92,15 @@ namespace Nfe.Properties {
                 return ((string)(this["Nfe_RecepcaoEvento_RecepcaoEvento"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://www.nfe.fazenda.gov.br/NFeConsultaDest/NFeConsultaDest.asmx")]
+        public string Nfe_NFeConsultaDest_NFeConsultaDest {
+            get {
+                return ((string)(this["Nfe_NFeConsultaDest_NFeConsultaDest"]));
+            }
+        }
     }
 }
