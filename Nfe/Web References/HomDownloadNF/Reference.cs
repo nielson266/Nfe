@@ -13,7 +13,7 @@
 // 
 #pragma warning disable 1591
 
-namespace Nfe.DownloadNF {
+namespace Nfe.HomDownloadNF {
     using System;
     using System.Web.Services;
     using System.Diagnostics;

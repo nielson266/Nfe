@@ -67,6 +67,7 @@
     <Compile Include="Entidade\Entidade_CCe.cs" />
     <Compile Include="Entidade\Entidade_ConsNFDest.cs" />
     <Compile Include="Entidade\Entidade_Destinatario.cs" />
+    <Compile Include="Entidade\Entidade_DownloadNFe.cs" />
     <Compile Include="Entidade\Entidade_Duplicatas.cs" />
     <Compile Include="Entidade\Entidade_Email.cs" />
     <Compile Include="Entidade\Entidade_Emitente.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="Model\FuncoesGerais.cs" />
     <Compile Include="Model\Model_Cancelamento.cs" />
     <Compile Include="Model\Model_CCe.cs" />
+    <Compile Include="Model\Model_DownloadNFe.cs" />
     <Compile Include="Model\Model_Email.cs" />
     <Compile Include="Model\Model_InutilizacaoNfe.cs" />
     <Compile Include="Model\Model_LogNfe.cs" />
@@ -130,6 +132,11 @@
     <Compile Include="Negocio\ConsultarProtocolo\EnviarConsultaNfe.cs" />
     <Compile Include="Negocio\ConsultarProtocolo\retConsSitNFe.Auto.cs" />
     <Compile Include="Negocio\ConsultarProtocolo\retConsSitNFe.cs" />
+    <Compile Include="Negocio\DownloadNFe\downloadNFe.cs" />
+    <Compile Include="Negocio\DownloadNFe\downloadNFe.Auto.cs" />
+    <Compile Include="Negocio\DownloadNFe\EnviarDownloadNFe.cs" />
+    <Compile Include="Negocio\DownloadNFe\retDownloadNFe.cs" />
+    <Compile Include="Negocio\DownloadNFe\retDownloadNFe.Auto..cs" />
     <Compile Include="Negocio\EnviarEmail\EnviarEmail.cs" />
     <Compile Include="Negocio\Geral\AssinaturaDigital.cs" />
     <Compile Include="Negocio\Geral\Mensagem.cs" />
@@ -172,7 +179,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
-    <Compile Include="Web References\DownloadNF\Reference.cs">
+    <Compile Include="Web References\DownloadNFeService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\HomDownloadNF\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -236,8 +248,13 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\DownloadNF\NfeDownloadNF.wsdl" />
-    <None Include="Web References\DownloadNF\Reference.map">
+    <None Include="Web References\DownloadNFeService\NfeDownloadNF.wsdl" />
+    <None Include="Web References\DownloadNFeService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\HomDownloadNF\NfeDownloadNF.wsdl" />
+    <None Include="Web References\HomDownloadNF\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -322,7 +339,7 @@
     </WebReferenceUrl>
     <WebReferenceUrl Include="https://hom.sefazvirtual.fazenda.gov.br/NfeDownloadNF/NfeDownloadNF.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\DownloadNF\</RelPath>
+      <RelPath>Web References\HomDownloadNF\</RelPath>
       <UpdateFromURL>https://hom.sefazvirtual.fazenda.gov.br/NfeDownloadNF/NfeDownloadNF.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
@@ -375,9 +392,20 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>Nfe_NFeConsultaDest_NFeConsultaDest</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="https://www.nfe.fazenda.gov.br/NfeDownloadNF/NfeDownloadNF.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\DownloadNFeService\</RelPath>
+      <UpdateFromURL>https://www.nfe.fazenda.gov.br/NfeDownloadNF/NfeDownloadNF.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Nfe_DownloadNFe_NfeDownloadNF</CachedSettingsPropName>
+    </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Web References\DownloadNF\NfeDownloadNF.disco" />
+    <None Include="Web References\HomDownloadNF\NfeDownloadNF.disco" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Web References\RetAutorizacao\NfeRetAutorizacao.disco" />
@@ -389,6 +417,7 @@
     <Content Include="Image\backuground.jpg" />
     <Content Include="Image\ok.png" />
     <Content Include="Image\Soft.ico" />
+    <None Include="Web References\DownloadNFeService\NfeDownloadNF.disco" />
     <None Include="Web References\NFeConsultaDest\NFeConsultaDest.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

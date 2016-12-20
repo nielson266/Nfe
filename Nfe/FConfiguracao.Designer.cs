@@ -52,6 +52,7 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.TmConsultaNFeDestinatario = new System.Windows.Forms.Timer(this.components);
             this.TmManifestacao = new System.Windows.Forms.Timer(this.components);
+            this.TmDownloadNFe = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // TmStatus
@@ -213,9 +214,14 @@
             // 
             // TmManifestacao
             // 
-            this.TmManifestacao.Enabled = true;
             this.TmManifestacao.Interval = 30000;
             this.TmManifestacao.Tick += new System.EventHandler(this.TmManifestacao_Tick);
+            // 
+            // TmDownloadNFe
+            // 
+            this.TmDownloadNFe.Enabled = true;
+            this.TmDownloadNFe.Interval = 30000;
+            this.TmDownloadNFe.Tick += new System.EventHandler(this.TmDownloadNFe_Tick);
             // 
             // FConfiguracao
             // 
@@ -266,5 +272,6 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Timer TmConsultaNFeDestinatario;
         private System.Windows.Forms.Timer TmManifestacao;
+        private System.Windows.Forms.Timer TmDownloadNFe;
     }
 }

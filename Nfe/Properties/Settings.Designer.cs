@@ -102,5 +102,15 @@ namespace Nfe.Properties {
                 return ((string)(this["Nfe_NFeConsultaDest_NFeConsultaDest"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://www.nfe.fazenda.gov.br/NfeDownloadNF/NfeDownloadNF.asmx")]
+        public string Nfe_DownloadNFe_NfeDownloadNF {
+            get {
+                return ((string)(this["Nfe_DownloadNFe_NfeDownloadNF"]));
+            }
+        }
     }
 }

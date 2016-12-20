@@ -23,6 +23,7 @@ using Nfe.Negocio.EnviarEmail;
 using Nfe.Model;
 using Nfe.Negocio;
 using Nfe.Negocio.Manifestacao;
+using Nfe.Negocio.DownloadNFe;
 
 namespace Nfe
 {
@@ -566,6 +567,35 @@ namespace Nfe
 
             TmManifestacao.Enabled = true;
 
+        }
+
+        private void TmDownloadNFe_Tick(object sender, EventArgs e)
+        {
+            TmDownloadNFe.Enabled = false;
+
+            Model_DownloadNFe ObjDownloadNFe = new Model_DownloadNFe();
+            EnviarDownloadNFe ObjNegDownloadNFe = new EnviarDownloadNFe();
+            Entidade_DownloadNFe ObjEntDownloadNfe;
+
+            List<string> ListChAcessoNFe = new List<string>();
+
+            var DtDownload = ObjDownloadNFe.ConsultaNFeDownload();
+
+            ObjEntDownloadNfe = new Entidade_DownloadNFe();
+
+            ObjEntDownloadNfe.id_loja = 1;
+
+
+            for (int i = 0; i < DtDownload.Rows.Count; i++)
+            {
+                ListChAcessoNFe.Add(DtDownload.Rows[i]["txchacessonfe"].ToString());
+            }
+
+            ObjEntDownloadNfe.ChaveNFe = ListChAcessoNFe;
+
+            ObjNegDownloadNFe.Enviar(ObjEntDownloadNfe, out ObjEntDownloadNfe);
+
+            TmDownloadNFe.Enabled = true;
         }
     }
 }
