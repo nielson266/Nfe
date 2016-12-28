@@ -105,17 +105,19 @@ namespace Nfe.Negocio.DownloadNFe
 
             objRet = xmlDesSerializar.Deserialize(retXmlNodeReader);
 
-            Ret = (retDownloadNFe.TRetDownloadNFe)objRet;
+            Ret = (TRetDownloadNFe)objRet;
 
             XmlDocument docxmlret = new XmlDocument();
 
-            foreach (var itemProc in Ret.retNFe)
+            if (Convert.ToInt32(Ret.cStat) == 139)
             {
-                var RetProc = (TRetDownloadNFeRetNFeProcNFe)itemProc.Item ;
-                docxmlret.LoadXml(RetProc.Any.OuterXml);
-                objDes.xmlNfe = docxmlret;
-
-                ObjDownloadNFe.IncluirDownloadNFe(objDes.id_loja, itemProc.chNFe, docxmlret.OuterXml);
+                foreach (var itemProc in Ret.retNFe)
+                {
+                    var RetProc = (TRetDownloadNFeRetNFeProcNFe)itemProc.Item;
+                    docxmlret.LoadXml(RetProc.Any.OuterXml);
+                    objDes.xmlNfe = docxmlret;
+                    ObjDownloadNFe.IncluirDownloadNFe(objDes.id_loja, itemProc.chNFe, docxmlret.OuterXml, Convert.ToInt32(itemProc.cStat));
+                }
             }
         }
     }

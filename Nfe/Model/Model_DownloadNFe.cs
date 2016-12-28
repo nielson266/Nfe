@@ -11,11 +11,11 @@ namespace Nfe.Model
 
         public DataTable ConsultaNFeDownload()
         {
-            return BancoDados.Consultar("SELECT txchacessonfe FROM itemmanifestacao WHERE codmanifestacao=210200 AND codretorno=135 limit 10");
+            return BancoDados.Consultar("SELECT txchacessonfe FROM itemmanifestacao imf WHERE not exists (SELECT * FROM downloadnfe d where d.txchacessonfe = imf.txchacessonfe) AND codmanifestacao=210200 AND codretorno=135  limit 10");
         }
 
 
-        public void IncluirDownloadNFe(int IdLoja ,string ChAcessoNFe, string XmlNFe)
+        public void IncluirDownloadNFe(int IdLoja ,string ChAcessoNFe, string XmlNFe, int codretorno)
         {
             try
             {
@@ -29,6 +29,7 @@ namespace Nfe.Model
                 command.Parameters.AddWithValue("id_loja", IdLoja);
                 command.Parameters.AddWithValue("txchacessonfe", ChAcessoNFe);
                 command.Parameters.AddWithValue("xmlnfe", XmlNFe);
+                command.Parameters.AddWithValue("codretorno", codretorno);
                 command.ExecuteNonQuery();
 
                 BeginTrans.Commit();
